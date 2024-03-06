@@ -21,6 +21,9 @@ import java.io.IOException;
     // GET(Hien thi)
     // POST (Xu ly)
 // VALUE=> Giong Y SI DE BAI
+    // FE (view clien giao diẹn) => jframe/jsp/html => webapp 
+// BE(server) => logic => service, repositor, ..
+// trao doi bang controller thong qua phuong thuc HTTPMethods
 public class LoginServlet extends HttpServlet {
 
     @Override
