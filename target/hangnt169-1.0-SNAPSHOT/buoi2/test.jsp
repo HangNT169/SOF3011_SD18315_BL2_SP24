@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: hangnt
   Date: 08/03/2024
-  Time: 07:38
+  Time: 08:33
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-abcd
+stfghsfghbsdf
 </body>
 </html>

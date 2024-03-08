@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "LoginServlet ", value = "/login")
+@WebServlet(name = "LoginServlet ", value = {"/login","/ket-qua"})
 // value : Chua duong dan cua trang web
 // Duong dan BAT BUOC PHAI BAT DAU / => KHONG LA CHET TOMCAT K BUILD DC
 // server vs client => HTTP methods :
@@ -32,11 +32,19 @@ public class LoginServlet extends HttpServlet {
         // C1: getRequestDispatcher => Mang du lieu can truyen di
 //        request.getRequestDispatcher("login.jsp").forward(request,response);
         // C2: chuyen trang => sendRedirect => Du lieu k dc day di
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("/buoi2/login.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // B1: Lay du lieu tu jsp ve servlet  => getParameter
+        String name = request.getParameter("uname");
+        String password = request.getParameter("psw");
+        // B2: Truyen gia tri tu servlet sang jsp
+        request.setAttribute("usname",name);
+        request.setAttribute("password",password);
+        // B3: Chuyen trang
+        request.getRequestDispatcher("/buoi2/ketqua.jsp").forward(request,response);
     }
 
 }
