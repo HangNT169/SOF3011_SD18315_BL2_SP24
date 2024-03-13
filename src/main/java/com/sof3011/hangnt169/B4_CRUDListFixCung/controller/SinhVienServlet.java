@@ -7,8 +7,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.SneakyThrows;
+import org.apache.commons.beanutils.BeanUtils;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +59,7 @@ public class SinhVienServlet extends HttpServlet {
         }
     }
 
+    @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // B1: Lay gia tri tren duong dan
@@ -72,10 +76,40 @@ public class SinhVienServlet extends HttpServlet {
     private void updateSinhVien(HttpServletRequest request, HttpServletResponse response) {
     }
 
-    private void addSinhVien(HttpServletRequest request, HttpServletResponse response) {
+    private void addSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InvocationTargetException, IllegalAccessException {
+        // C1: Lam o muc co ban
+        // B1: Lay du lieu view => servlet
+//        String ma = request.getParameter("mssv");
+//        String ten = request.getParameter("ten");
+//        String tuoi = request.getParameter("tuoi");
+//        String gioiTinh = request.getParameter("gioiTinh");
+//        String diaChi = request.getParameter("diaChi");
+//        // B2: Khoi tao doi tuong
+//        SinhVien sv = SinhVien.builder()
+//                .gioiTinh(Boolean.valueOf(gioiTinh))
+//                .diaChi(diaChi)
+//                .tuoi(Integer.valueOf(tuoi))
+//                .ten(ten)
+//                .mssv(ma)
+//                .build(); // contructor k tham so
+//        // B3: Goi service
+//        sinhVienService.addSinhVien(sv);
+//        // B4: Chuyen trang
+//        response.sendRedirect("/sinh-vien/hien-thi");
+//        sinhViens = sinhVienService.getAll();
+//        request.setAttribute("lists",sinhViens);
+//        request.getRequestDispatcher("/buoi4/sinhviens.jsp").forward(request,response);
+//        // B4: Chuyen trang
+////        request.getRequestDispatcher("/buoi4/sinhviens.jsp").forward(request,response);
+        // C2: Su dung Beanutils
+        SinhVien sv = new SinhVien();
+        BeanUtils.populate(sv,request.getParameterMap());
+        sinhVienService.addSinhVien(sv);
+        response.sendRedirect("/sinh-vien/hien-thi");
     }
 
-    private void viewAdd(HttpServletRequest request, HttpServletResponse response) {
+    private void viewAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/buoi4/add-sinh-vien.jsp").forward(request,response);
     }
 
     private void viewUpdate(HttpServletRequest request, HttpServletResponse response) {

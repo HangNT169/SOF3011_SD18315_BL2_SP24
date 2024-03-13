@@ -22,4 +22,10 @@ public class SinhVienService {
     public List<SinhVien> getAll() {
         return listSinhVien;
     }
+
+    // validate => HashMap
+    public void addSinhVien(SinhVien sv){
+        listSinhVien.add(sv);
+    }
+
 }

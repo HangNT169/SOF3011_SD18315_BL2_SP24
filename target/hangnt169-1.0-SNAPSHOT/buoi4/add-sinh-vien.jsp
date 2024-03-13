@@ -6,7 +6,7 @@
 <body>
 
 <form action="/sinh-vien/add" method="post">
-    MSSV: <input type="text" name="mssv"/>
+    MSSV: <input type="text" name="ma"/>
     <br/>
     Tên: <input type="text" name="ten"/>
     <br/>
