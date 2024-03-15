@@ -24,8 +24,32 @@ public class SinhVienService {
     }
 
     // validate => HashMap
-    public void addSinhVien(SinhVien sv){
+    public void addSinhVien(SinhVien sv) {
         listSinhVien.add(sv);
     }
 
+    // 5 6 -1 3
+    // 0 1 2 3  : a[100]
+    // i => a[i]: gia tri cua phan tu trong mang
+    // Mang dong : lists
+    // SV1 SV2 SV5 SV8
+    // 0    1   2   3
+    // i => lists[i] : Khong viet ntn => list.get(i)
+    public void xoaSinhVien(String mssv) {
+        for (int i = 0; i < listSinhVien.size(); i++) {
+            if (listSinhVien.get(i).getMssv().equalsIgnoreCase(mssv)) {
+                listSinhVien.remove(i);
+            }
+        }
+    }
+
+    // filter
+    public SinhVien detailSinhVien(String mssv) {
+        for (SinhVien sv : listSinhVien) {
+            if (sv.getMssv().equalsIgnoreCase(mssv)) {
+                return sv;
+            }
+        }
+        return null;
+    }
 }
