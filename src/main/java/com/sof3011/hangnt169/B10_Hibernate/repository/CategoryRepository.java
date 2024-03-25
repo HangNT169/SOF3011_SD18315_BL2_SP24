@@ -2,6 +2,7 @@ package com.sof3011.hangnt169.B10_Hibernate.repository;
 
 import com.sof3011.hangnt169.B10_Hibernate.config.HibernateConfig;
 import com.sof3011.hangnt169.B10_Hibernate.entity.Category;
+import jakarta.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -21,7 +22,9 @@ public class CategoryRepository {
     // Get one
     public Category getOne(Long id) {
         Session session = HibernateConfig.getFACTORY().openSession();
-        Category c = (Category) session.createQuery("FROM Category WHERE id1 =:id").getSingleResult();
+        Query query = session.createQuery("from  Category where id1 = :id");
+        query.setParameter("id", id);
+        Category c  = (Category) query.getSingleResult();
         session.close();
         return c;
     }
