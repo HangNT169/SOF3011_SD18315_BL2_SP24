@@ -1,6 +1,7 @@
 package com.sof3011.hangnt169.B10_Hibernate.config;
 
 import com.sof3011.hangnt169.B10_Hibernate.entity.Category;
+import com.sof3011.hangnt169.B10_Hibernate.entity.Product;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -10,6 +11,7 @@ import org.hibernate.service.ServiceRegistry;
 import java.util.Properties;
 
 public class HibernateConfig {
+
     private static final SessionFactory FACTORY;
 
     static {
@@ -25,6 +27,8 @@ public class HibernateConfig {
 
         conf.setProperties(properties);
         conf.addAnnotatedClass(Category.class); // Dang ky vs hibernate de mapper thang nay nhe
+        conf.addAnnotatedClass(Product.class); // Dang ky vs hibernate de mapper thang nay nhe
+
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
         FACTORY = conf.buildSessionFactory(registry);

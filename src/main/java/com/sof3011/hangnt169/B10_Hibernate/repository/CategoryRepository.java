@@ -10,18 +10,24 @@ import java.util.List;
 
 public class CategoryRepository {
 
+    private Session session;
+
+    public CategoryRepository() {
+        session = HibernateConfig.getFACTORY().openSession();
+    }
+
     // CRUD => CREATE + READ + UPDATE + DELETE
     // GET ALL
     public List<Category> getAll() {
-        Session session = HibernateConfig.getFACTORY().openSession();
+//        Session session = HibernateConfig.getFACTORY().openSession();
         List<Category> lists = session.createQuery("FROM Category").list();
-        session.close();
+//        session.close();
         return lists;
     }
 
     // Get one
     public Category getOne(Long id) {
-        Session session = HibernateConfig.getFACTORY().openSession();
+//        Session session = HibernateConfig.getFACTORY().openSession();
         Query query = session.createQuery("from  Category where id1 = :id");
         query.setParameter("id", id);
         Category c  = (Category) query.getSingleResult();
@@ -29,17 +35,28 @@ public class CategoryRepository {
         return c;
     }
 
+//    try..with..resource
     // Add
-    public boolean add(Category category) {
-        Transaction tra = null;
-        try (Session s = HibernateConfig.getFACTORY().openSession()) {
-            tra = s.beginTransaction();
-            s.persist(category); // Add
-            tra.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
+//    public boolean add(Category category) {
+//        Transaction tra = null;
+//        try (Session s = HibernateConfig.getFACTORY().openSession()) {
+//            tra = s.beginTransaction();
+//            s.persist(category); // Add
+//            tra.commit();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return true;
+//    }
+
+    public void add(Category c){
+        try {
+            session.beginTransaction().begin();
+            session.persist(c);
+            session.beginTransaction().commit();
+        }catch (Exception e){
+            session.beginTransaction().rollback();
         }
-        return true;
     }
 
     // Update

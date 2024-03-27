@@ -26,6 +26,13 @@ public class Category {
      *      + Khoa chinh
      *      + Khoa ngoai
      *      + Column binh thuong
+     *  - Relationship :
+     *      + 1-1: One to One
+     *      + 1-n: One to Many
+     *      + n-1: Many to one
+     *      + n-n: Many to Many
+     *      1 Product -> 1 Category
+     *      1 Category -> N Product
      */
 
     @Id
@@ -37,6 +44,6 @@ public class Category {
     private String categoryCode;
 
     @Column(name = "category_name")
-    private String categoryName;
+    private String categoryName1;
 
 }
